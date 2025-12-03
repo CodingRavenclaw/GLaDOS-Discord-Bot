@@ -1,0 +1,58 @@
+# ----------------------------
+# Build / Gradle
+# ----------------------------
+/build/
+/out/
+/.gradle/
+/!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
+
+# Local Gradle Settings
+gradle-app.setting
+
+# ----------------------------
+# IDEs
+# ----------------------------
+
+# IntelliJ / Android Studio
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# VS Code
+.vscode/
+
+# Eclipse
+.project
+.classpath
+.settings/
+bin/
+
+# NetBeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+*.nb-gradle
+
+# ----------------------------
+# Java
+# ----------------------------
+*.class
+*.log
+
+# ----------------------------
+# OS files
+# ----------------------------
+.DS_Store
+Thumbs.db
+
+# ----------------------------
+# Environment / Secrets
+# ----------------------------
+*.env
+*.key
+*.keystore
+*.jks
