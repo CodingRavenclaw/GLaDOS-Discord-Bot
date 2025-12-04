@@ -12,6 +12,11 @@ public class PingSlashCommand implements SlashCommand {
         return Commands.slash("ping", "Answers with pong!");
     }
 
+    /**
+     * Executes the "ping" slash command, replying with "Pong! 🏓".
+     *
+     * @param event The event that triggered the slash command interaction.
+     */
     @Override
     public void execute(SlashCommandInteractionEvent event) {
         event.reply("Pong! 🏓").setEphemeral(true).queue();

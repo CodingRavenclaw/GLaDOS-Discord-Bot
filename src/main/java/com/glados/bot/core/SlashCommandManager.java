@@ -15,14 +15,16 @@ public class SlashCommandManager {
     private final Map<String, SlashCommand> commands = new HashMap<>();
 
     /**
-     * Default constructor registering all default commands.
+     * Constructs a new instance of the SlashCommandManager class and initializes
+     * it by automatically registering all default slash commands.
      */
     public SlashCommandManager() {
         registerDefaults();
     }
 
+
     /**
-     * Registers all default commands.
+     * Registers the default set of slash commands to the command manager.
      */
     private void registerDefaults() {
         register(new PingSlashCommand());
@@ -30,9 +32,12 @@ public class SlashCommandManager {
     }
 
     /**
-     * Registers a slash command.
+     * Registers a provided slash command with the command manager, allowing it
+     * to be recognized and executed based on its name.
      *
-     * @param aCommand The slash command to register.
+     * @param aCommand The slash command to be registered. It must implement
+     *                 the SlashCommand interface and provide the relevant
+     *                 SlashCommandData, including the command name and description.
      */
     public void register(SlashCommand aCommand) {
         String commandName = aCommand.getCommandData().getName().toLowerCase();
@@ -40,9 +45,10 @@ public class SlashCommandManager {
     }
 
     /**
-     * Returns all registered slash command data.
+     * Retrieves a list of all registered slash command data from the command manager.
+     * Each slash command's data includes relevant metadata such as its name and description.
      *
-     * @return All registered slash command data.
+     * @return A list of {@code SlashCommandData} representing all registered slash commands.
      */
     public List<SlashCommandData> getAllCommandData() {
         return commands.values().stream()
@@ -50,10 +56,15 @@ public class SlashCommandManager {
                 .collect(Collectors.toList());
     }
 
+
     /**
-     * Handles a slash command event.
+     * Handles an incoming slash command interaction event by routing it to the appropriate
+     * command implementation registered in the SlashCommandManager. If the command is not
+     * recognized, a default reply is sent back indicating an unknown command.
      *
-     * @param anEvent The slash command event.
+     * @param anEvent The slash command interaction event containing the context of the
+     *                triggered command, including its name, user information, and any
+     *                provided arguments.
      */
     public void handle(SlashCommandInteractionEvent anEvent) {
         String eventName = anEvent.getName().toLowerCase();

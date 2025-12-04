@@ -4,16 +4,20 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 
 public interface SlashCommand {
+
     /**
-     * Returns the command data for the slash command.
-     * @return The command data.
+     * Retrieves the slash command data associated with this command.
+     *
+     * @return The SlashCommandData representing this command, including its name and description.
      */
     SlashCommandData getCommandData();
 
     /**
-     * Executes the slash command.
+     * Executes the specific logic associated with the triggered slash command.
      *
-     * @param anEvent The slash command event.
+     * @param anEvent The slash command interaction event containing the context
+     *                of the command, including the user interaction and any
+     *                provided arguments.
      */
     void execute(SlashCommandInteractionEvent anEvent);
 }

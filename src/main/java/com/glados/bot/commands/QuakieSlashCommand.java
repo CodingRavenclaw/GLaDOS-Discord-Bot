@@ -12,6 +12,11 @@ public class QuakieSlashCommand implements SlashCommand {
         return Commands.slash("quakie", "Returns a quote from the famous quakie!");
     }
 
+    /**
+     * Executes the "quakie" slash command, replying with a random quote attributed to "Lukas".
+     *
+     * @param event The event that triggered the slash command interaction.
+     */
     @Override
     public void execute(SlashCommandInteractionEvent event) {
         String[] lukasQuotes = {

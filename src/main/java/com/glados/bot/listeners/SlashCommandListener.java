@@ -18,6 +18,13 @@ public class SlashCommandListener extends ListenerAdapter {
         this.commandManager = commandManager;
     }
 
+    /**
+     * Handles an interaction event triggered by a slash command. Delegates
+     * the event to the registered command manager for further processing and execution.
+     *
+     * @param event The SlashCommandInteractionEvent representing a triggered slash command,
+     *              including the command's name, user context, and any provided arguments.
+     */
     @Override
     public void onSlashCommandInteraction(@NotNull SlashCommandInteractionEvent event) {
         commandManager.handle(event);
