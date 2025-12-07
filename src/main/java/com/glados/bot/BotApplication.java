@@ -3,7 +3,6 @@ package com.glados.bot;
 import com.glados.bot.core.SlashCommandManager;
 import com.glados.bot.listeners.ReactionRoleListener;
 import com.glados.bot.listeners.SlashCommandListener;
-import io.github.cdimascio.dotenv.Dotenv;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
@@ -22,8 +21,8 @@ public class BotApplication extends ListenerAdapter {
      *                   in loading environment variables, building the JDA instance, or registering commands.
      */
     public static void main(String[] args) throws Exception {
-        final Dotenv DOTENV = Dotenv.load();
-        String token = DOTENV.get("DISCORD_TOKEN");
+        String token = System.getenv("DISCORD_TOKEN");
+
         SlashCommandManager commandManager = new SlashCommandManager();
 
         JDA jda = JDABuilder.createDefault(
