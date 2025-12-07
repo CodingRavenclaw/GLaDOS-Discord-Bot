@@ -1,0 +1,11 @@
+services:
+  glados-bot:
+    build: .
+    container_name: glados-bot
+    restart: unless-stopped
+    env_file:
+      - .env
+
+    # Falls du später Logs, Mounts etc. willst, kannst du das hier ergänzen:
+    # volumes:
+    #   - ./logs:/app/logs
