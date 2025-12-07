@@ -8,8 +8,12 @@ import net.dv8tion.jda.api.events.message.react.MessageReactionAddEvent;
 import net.dv8tion.jda.api.events.message.react.MessageReactionRemoveEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ReactionRoleListener extends ListenerAdapter {
+
+    private static final Logger log = LoggerFactory.getLogger(ReactionRoleListener.class);
 
     /**
      * Handles the addition of a reaction to a message. Evaluates if the reaction is relevant,
@@ -53,26 +57,11 @@ public class ReactionRoleListener extends ListenerAdapter {
 
         Member member = event.getMember();
         if (member == null) {
-            event.getGuild().retrieveMemberById(event.getUserIdLong()).queue(
-                    loadedMember -> handleRoleRemoval(loadedMember, event),
-                    error -> System.err.println("Failed to retrieve member: " + error.getMessage())
-            );
             return;
         }
 
-        handleRoleRemoval(member, event);
-    }
-
-    /**
-     * Handles the removal of a role from a guild member based on a reaction being removed from a message.
-     * Resolves the role associated with the removed reaction and removes it from the specified member.
-     *
-     * @param member The guild member from whom the role is to be removed.
-     * @param event  The MessageReactionRemoveEvent containing details about the reaction removal.
-     */
-    private void handleRoleRemoval(Member member, MessageReactionRemoveEvent event) {
         Role role = resolveRole(event);
-        if (role == null) {
+        if (role == null)  {
             return;
         }
 
@@ -132,12 +121,11 @@ public class ReactionRoleListener extends ListenerAdapter {
         event.getGuild()
                 .addRoleToMember(member, role)
                 .queue(
-                        success -> System.out.println(
-                                "Added role " + role.getName()
-                                        + " to " + member.getEffectiveName()
-                        ),
-                        error -> System.err.println(
-                                "Failed to add role: " + error.getMessage()
+                        success -> log.info("Added role {} to {}", role.getName(), member.getEffectiveName()),
+                        error -> log.error("Failed to add role {} to {}: {}",
+                                role.getName(),
+                                member.getEffectiveName(),
+                                error.getMessage()
                         )
                 );
     }
@@ -154,12 +142,11 @@ public class ReactionRoleListener extends ListenerAdapter {
         event.getGuild()
                 .removeRoleFromMember(member, role)
                 .queue(
-                        success -> System.out.println(
-                                "Removed role " + role.getName()
-                                        + " from " + member.getEffectiveName()
-                        ),
-                        error -> System.err.println(
-                                "Failed to remove role: " + error.getMessage()
+                        success -> log.info("Removed role {} from {}", role.getName(), member.getEffectiveName()),
+                        error -> log.error("Failed to remove role {} from {}: {}",
+                                role.getName(),
+                                member.getEffectiveName(),
+                                error.getMessage()
                         )
                 );
     }
