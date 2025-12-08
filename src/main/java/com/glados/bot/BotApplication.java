@@ -3,7 +3,6 @@ package com.glados.bot;
 import com.glados.bot.core.SlashCommandManager;
 import com.glados.bot.listeners.ReactionRoleListener;
 import com.glados.bot.listeners.SlashCommandListener;
-import com.glados.bot.listeners.VoiceListener;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
@@ -39,7 +38,6 @@ public class BotApplication extends ListenerAdapter {
                 .addEventListeners(new BotApplication())
                 .addEventListeners(new SlashCommandListener(commandManager))
                 .addEventListeners(new ReactionRoleListener())
-                .addEventListeners(new VoiceListener())
                 .setActivity(Activity.playing("Recklinghausen > Derbe..."))
                 .build()
                 .awaitReady();
