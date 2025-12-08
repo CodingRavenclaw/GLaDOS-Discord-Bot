@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 
 public class ReactionRoleListener extends ListenerAdapter {
 
-    private static final Logger log = LoggerFactory.getLogger(ReactionRoleListener.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ReactionRoleListener.class);
 
     /**
      * Handles the addition of a reaction to a message. Evaluates if the reaction is relevant,
@@ -121,8 +121,8 @@ public class ReactionRoleListener extends ListenerAdapter {
         event.getGuild()
                 .addRoleToMember(member, role)
                 .queue(
-                        success -> log.info("Added role {} to {}", role.getName(), member.getEffectiveName()),
-                        error -> log.error("Failed to add role {} to {}: {}",
+                        success -> LOGGER.info("Added role {} to {}", role.getName(), member.getEffectiveName()),
+                        error -> LOGGER.error("Failed to add role {} to {}: {}",
                                 role.getName(),
                                 member.getEffectiveName(),
                                 error.getMessage()
@@ -142,8 +142,8 @@ public class ReactionRoleListener extends ListenerAdapter {
         event.getGuild()
                 .removeRoleFromMember(member, role)
                 .queue(
-                        success -> log.info("Removed role {} from {}", role.getName(), member.getEffectiveName()),
-                        error -> log.error("Failed to remove role {} from {}: {}",
+                        success -> LOGGER.info("Removed role {} from {}", role.getName(), member.getEffectiveName()),
+                        error -> LOGGER.error("Failed to remove role {} from {}: {}",
                                 role.getName(),
                                 member.getEffectiveName(),
                                 error.getMessage()
