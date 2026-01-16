@@ -29,12 +29,12 @@ public class ReactionRoleListener extends ListenerAdapter {
         }
 
         Member member = event.getMember();
-        if (member == null)  {
+        if (member == null) {
             return;
         }
 
         Role role = resolveRole(event);
-        if (role == null)  {
+        if (role == null) {
             return;
         }
 
@@ -61,7 +61,7 @@ public class ReactionRoleListener extends ListenerAdapter {
         }
 
         Role role = resolveRole(event);
-        if (role == null)  {
+        if (role == null) {
             return;
         }
 
@@ -86,11 +86,10 @@ public class ReactionRoleListener extends ListenerAdapter {
             return false;
         }
 
-        if (event.getChannel().getIdLong() != ReactionRoleConfig.CHANNEL_ID) {
-            return false;
-        }
+        long channelId = event.getChannel().getIdLong();
+        long messageId = event.getMessageIdLong();
 
-        return event.getMessageIdLong() == ReactionRoleConfig.MESSAGE_ID;
+        return messageId == ReactionRoleConfig.CHANNEL_TO_MESSAGE.getOrDefault(channelId, -1L);
     }
 
     /**
@@ -114,8 +113,8 @@ public class ReactionRoleListener extends ListenerAdapter {
      * Logs the outcome of the role assignment operation, indicating success or failure.
      *
      * @param member The guild member to whom the role is to be added.
-     * @param role The role to be assigned to the member.
-     * @param event The MessageReactionAddEvent triggering the addition of the role.
+     * @param role   The role to be assigned to the member.
+     * @param event  The MessageReactionAddEvent triggering the addition of the role.
      */
     private void addRole(Member member, Role role, MessageReactionAddEvent event) {
         event.getGuild()
